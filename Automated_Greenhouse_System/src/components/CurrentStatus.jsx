@@ -2,15 +2,19 @@ import React from 'react';
 import { useGlobalContext } from './context';
 
 const Card = ({ label, value, icon }) => {
-  
+  let unit = ''; 
   let bgColorClass = '';
   if (label === 'Humidity') {
+    unit = '%';
     bgColorClass = 'bg-gradient-to-b from-blue-500 via-blue-400 to-blue-300';
   } else if (label === 'Temperature') {
+    unit = "℃";
     bgColorClass = 'bg-gradient-to-b from-orange-500 via-orange-400 to-orange-300';
   } else if (label === 'Light') {
+    unit = "Lux"; 
     bgColorClass = 'bg-gradient-to-b from-green-500 via-green-400 to-green-300';
   } else if (label === 'Soil'){
+    unit = '%';
     bgColorClass = 'bg-customBrown';
 
   }
@@ -24,7 +28,7 @@ const Card = ({ label, value, icon }) => {
           <div className='text-5xl flex items-center'>{value}</div>
           <div className="flex mb-7 text-2xl">{icon}</div>
         </div>
-        <div className='flex justify-center font-bold'>%</div>
+        <div className='flex justify-center font-bold'>{unit}</div>
       </div>
     </div>
   );
