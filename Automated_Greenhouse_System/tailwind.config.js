@@ -4,7 +4,13 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        customBrown: '#8B4513', // Mã màu nâu tùy chỉnh
+      },
+    },
   },
+
   plugins: [],
 }
+
