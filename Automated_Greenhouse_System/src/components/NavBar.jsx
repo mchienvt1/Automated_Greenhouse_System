@@ -57,7 +57,7 @@ const DropDownList = () => {
 
 const NavBar = () => {
     return (
-        <nav class='flex flex-row items-center mx-6 my-4'>
+        <nav class='flex flex-row items-center px-6 py-4'>
             <SearchInput />
             <UserInfo />
             <DropDownList />
