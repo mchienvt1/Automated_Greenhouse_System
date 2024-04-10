@@ -1,4 +1,10 @@
 const mongoose = require('mongoose');
+const datatype = {
+    HUMIDITY : "HUMIDITY",
+    TEMPERATURE : "TEMPERATURE",
+    LIGHT : "LIGHT",
+    MOISTURE : "MOISTURE"
+}
 
 const deviceSchema = mongoose.Schema({
     device_id : {
@@ -22,11 +28,15 @@ const deviceSchema = mongoose.Schema({
         required : true,
     },
     location : {
-        type: string,
+        type: String,
         required: false
     },
     task : {
         type : Array,
+        required : true
+    },
+    threshold :{
+        type : Map, // Map each datatype to a set of threshold values string -> array
         required : true
     }
 })

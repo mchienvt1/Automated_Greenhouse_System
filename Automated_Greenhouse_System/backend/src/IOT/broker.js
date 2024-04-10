@@ -1,0 +1,47 @@
+const mqtt = require('mqtt');
+const { username, key } = require('../config/env');
+
+const brokerUrl = `mqtts://${username}:${key}@io.adafruit.com`
+const options = { port : 443 }
+
+const broker = mqtt.connect(brokerUrl, options);
+
+broker.on('connect', () => {
+    console.log("Connected to Adafruit!")
+});
+broker.on('disconnect', () => {
+    console.log("Disconnected to Adafruit!")
+})
+
+broker.on('message', (topic, message, packet) => {
+        console.log("Received '" + message + "' on '" + topic + "'");
+})
+
+function subscribe(feed_id){
+    broker.subscribe(username + "/feeds/" + feed_id,()=>{
+        // console.log("Subscribed to " + feed_id)
+    })
+}
+function subscribeAll(){
+    try {
+        console.log('Subscribing to all feeds')
+        subscribe('humidity')
+        subscribe('light')
+        subscribe('temperature')
+        subscribe('pumper')
+        subscribe('led')
+        subscribe('soil-humidity')
+        console.log('Subscribed to all feeds')
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+subscribeAll();
+
+function publish(feed_id,data){
+    broker.publish(username + "/feeds/" + feed_id,data,()=>{
+        // console.log("Published to " + feed_id + " : " + data);
+    });
+}
+module.exports = { broker , publish };
