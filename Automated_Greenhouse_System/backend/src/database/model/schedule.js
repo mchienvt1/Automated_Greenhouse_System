@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Schedule = require('../utils/schedule.js');
-const IoT = require('../utils/IoT.js');
+const IoT = require('../../IOT/IoT.js');
 const userSchema= require('./user.js');
 const deviceSchema = require('./device.js'); 
-const IoTInterface = require('../utils/IoT.js');
+const IoTInterface = require('../../IOT/IoT.js');
 
 const scheduleTaskSchema = mongoose.Schema({
     task_id : {
@@ -30,6 +30,10 @@ const scheduleTaskSchema = mongoose.Schema({
         required : true,
         type : IoTInterface
     },
+    deleted : {
+        required : false,
+        type : Boolean,
+    }
 })
 
 module.exports = mongoose.model('ScheduleTask', scheduleTaskSchema)

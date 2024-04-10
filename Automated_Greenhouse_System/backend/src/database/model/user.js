@@ -1,4 +1,4 @@
-const mongoose = required('mongoose');
+const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
     user_id : {
@@ -27,5 +27,5 @@ const userSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.module('User', userSchema)
+module.exports = mongoose.model('User', userSchema)
 

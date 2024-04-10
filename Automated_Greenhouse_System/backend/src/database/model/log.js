@@ -1,29 +1,35 @@
 const mongoose = require('mongoose');
 
 const device = require('./device.js');
+const log = require('../interface/log.js');
 
 const datatype = {
     HUMIDITY : "HUMIDITY",
     TEMPERATURE : "TEMPERATURE",
-    LIGHT : "LIGHT"
+    LIGHT : "LIGHT",
+    MOISTURE : "MOISTURE"
 }
 
 const logSchema = mongoose.Schema({
-    device_id : {
+    log_id : {
+        type : String,
         required : true,
-        type : device.device_id,
+    },
+    device_id : {
+        type : String,
+        required : true,
     },
     time : {
+        type : String,
         required : true,
-        type : Date,
     },
     value : {
+        type : Map,
         required : true,
-        type : String,
     },
-    type : {
+    controlStatus :{ 
+        type : Map,
         required : true,
-        type : datatype,
     }
 })
 
