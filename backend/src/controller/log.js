@@ -1,0 +1,1 @@
+const Log = require('../database/interface/')
