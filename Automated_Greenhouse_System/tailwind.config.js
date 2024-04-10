@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       colors: {
         customBrown: '#8B4513', // Mã màu nâu tùy chỉnh
+        customGreen: '#81D081'
       },
     },
   },
