@@ -45,7 +45,7 @@ const ChartComponent = () => {
   }
 
   return (
-    <div className="p-4 shadow-lg rounded-lg bg-white mx-3 my-5 w-1/2">
+    <div className="p-4 shadow-lg rounded-lg bg-white mx-3 my-2 w-[634px]">
       <div className="flex justify-between items-center mb-4">
         <div className="text-blue-500 text-xl font-bold">Statistics</div>
         <select onChange={handleChange} className="border rounded px-3 py-2">
