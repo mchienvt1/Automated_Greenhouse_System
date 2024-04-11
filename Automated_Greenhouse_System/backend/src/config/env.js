@@ -1,0 +1,2 @@
+
+module.exports = { username, key };
