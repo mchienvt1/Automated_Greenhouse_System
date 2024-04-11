@@ -4,7 +4,7 @@ const state = require('../config/state.json');
 
 class LogInterface{
     constructor(){
-        this.count = 11;
+        this.count = 37;
     }
     async createLog(device_id, data_retrieve, time){
         try{
