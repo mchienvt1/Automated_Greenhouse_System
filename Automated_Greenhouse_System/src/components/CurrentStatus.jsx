@@ -21,7 +21,7 @@ const Card = ({ label, value, icon }) => {
   
 
   return (
-    <div className={`flex items-center text-white ${bgColorClass} rounded-lg p-3`}>
+    <div className={`flex items-center text-white ${bgColorClass} rounded-lg p-[7px] mt-7`}>
       <div>
         <div className="flex font-bold items-center justify-center">{label}</div>
         <div className='flex flex-row items-center justify-center space-x-2 my-5 mx-5'>
@@ -41,14 +41,14 @@ const EnvironmentalCards = () => {
   const roundedLightIntensity = Math.round(lightIntensity);
   const roundedSoilHumidity = Math.round(soilHumidity);
   return (
-    <div className='bg-white rounded-3xl max-w-3xl mx-3 my-5'>
+    <div className='bg-white rounded-lg max-w-[640px] mx-3 my-5'>
       <div className='font-bold space-x-3 px-5 pt-5 text-xl'>
         <span className="text-gray-400" >Current </span>
       </div>
 
-      <div className="flex flex-row items-center
+      <div className="flex flex-row items-center 
       justify-center
-      space-x-7 px-3 py-5">
+      space-x-2 px-5 py-5">
         <Card label="Humidity" value={roundedHumidity} icon="💧" />
         <Card label="Temperature" value={roundedTemperature} icon="🌡️" />
         <Card label="Light" value={roundedLightIntensity} icon="☀️" />
