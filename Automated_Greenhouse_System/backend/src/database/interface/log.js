@@ -1,4 +1,5 @@
 const Log= require('../model/log')
+const { mutipleMongooseObject, mongooseToObject} = require('../utils/mongoose.js');
 
 class LogInterface{
     constructor(){
@@ -26,24 +27,36 @@ class LogInterface{
                 log_id : this.count++,
                 device_id : device_id,
                 time : time,
-                value : value,
+                value :value,
                 controlStatus : controlStatus
             })
-            // console.log(log)
+            console.log(log)
             await log.save()
             return log
         }catch(error){
-            // console.log(error)
+            console.log(error)
             return null
         }
     }
     async getLogs(device_id){
         try {
-            const logs = await this.log.find({device_id})
-            return logs
+            const logs = await Log.find({device_id : device_id}).then(
+                (logs) => logs.map((log) => ({
+                    id : log.log_id,
+                    humidity : log.value.HUMIDITY,
+                    temperature : log.value.TEMPERATURE,
+                    lightIntensity : log.value.LIGHT,
+                    soilHumidity : log.value.MOISTURE,
+                    lightBtn : log.controlStatus.LIGHT,
+                    pumperBtn : log.controlStatus.PUMP,
+                }))
+            );
+            // console.log(logs);
+            return logs;
         } catch(error){
-            // console.log(error)
-            return null
+            console.log(error);
+            return null;
+
         }
     }
 }
