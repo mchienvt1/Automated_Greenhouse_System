@@ -9,7 +9,7 @@ import { useGlobalContext } from '../components/context';
 import ChartComponent from '../components/Chart';
 import MyCalendar from '../components/Calendar';
 import Average from '../components/Average';
-
+import ManualControl from '../components/ManualControl';
 const HomePage = () => {
     useEffect(() => {
         document.title = 'Home'
@@ -44,20 +44,14 @@ const HomePage = () => {
 
     return (
         <div className='flex flex-row'>
-            <div className='w-1/5' >
-                <DashBoard />
-            </div>
-            <div className='w-4/5' style={{backgroundColor: '#e3e3e3'}}>
-                {/*Navigation bar*/}
-                <div style={{backgroundColor: 'white'}}>
-                    <NavBar />
-                </div>
-
-                
+            <div className='w-5/5' style={{backgroundColor: '#e3e3e3', width: '100%'}}>
                 {/* Main Components */}
-                <div className="flex flex-cols-2">
+                <div className="flex flex-cols-3">
+
                     <EnvironmentalCards />
                     <MyCalendar />
+                    <ManualControl />
+
                 </div>
                 <div className="flex flex-cols-2">
                     <ChartComponent/>

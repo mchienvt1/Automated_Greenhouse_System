@@ -48,7 +48,7 @@ const EnvironmentalCards = () => {
 
       <div className="flex flex-row items-center 
       justify-center
-      space-x-2 px-3 py-5">
+      space-x-2 px-5 py-5">
         <Card label="Humidity" value={roundedHumidity} icon="💧" />
         <Card label="Temperature" value={roundedTemperature} icon="🌡️" />
         <Card label="Light" value={roundedLightIntensity} icon="☀️" />
