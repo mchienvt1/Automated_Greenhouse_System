@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-
+import NoPageImage from '/nopage.webp'
 const NoPage = () => {
   useEffect(() => {
     document.title = '404 - Page Not Found'
   });
   return (
     <>
-        <img src="/nopage.webp" alt="no page" style={{width: '100%', height: '100%'}}/>
+    <img src={NoPageImage} alt="no page" className=''/>
     </>
   )
 }

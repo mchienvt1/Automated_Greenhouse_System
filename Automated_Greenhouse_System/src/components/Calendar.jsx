@@ -18,7 +18,7 @@ const MyCalendar = () => {
 
     return (
         <div className="calendar-container bg-[#E3E3E3] p-5 rounded-lg w-[350px]">
-            <div className="current-date bg-white font-bold p-2 rounded-lg mb-4 text-center">
+            <div className="current-date bg-white font-bold p-2 rounded-lg mb-4 text-center text-gray-400">
                 <h2>{formattedDate}</h2>
             </div>
             <div className="calendar bg-white p-4 rounded-lg">
