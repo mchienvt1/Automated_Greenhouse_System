@@ -34,7 +34,7 @@ const navLinks = [
     {
         name: "Sign Out",
         icon: SignOutSquare,
-        ref: "/"
+        ref: "/login"
     },
 ];
 

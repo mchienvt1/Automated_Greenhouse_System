@@ -47,7 +47,7 @@ const DropDownList = () => {
                 </li>
                 </ul>
                 <div class="py-2">
-                <a href="#" class="relative block px-4 py-2 text-sm">Sign out</a>
+                <a href="/login" class="relative block px-4 py-2 text-sm">Sign out</a>
                 </div>
             </div>
             )}

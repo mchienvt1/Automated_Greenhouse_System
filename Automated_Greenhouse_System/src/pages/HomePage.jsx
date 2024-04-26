@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import client from '../components/utils/adafruit';
 
-import NavBar from '../components/NavBar'
-import DashBoard from '../components/DashBoard';
 import EnvironmentalCards from '../components/CurrentStatus';
 import { useGlobalContext } from '../components/context';
 import ChartComponent from '../components/Chart';
@@ -57,9 +55,6 @@ const HomePage = () => {
                     <ChartComponent/>
                     <Average />
                 </div>
-                
-                
-
             </div>
         </div>
     )
