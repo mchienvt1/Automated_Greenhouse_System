@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from './pages/HomePage'
 import NoPage from './pages/NoPage'
 import NavBar from './components/NavBar'
@@ -8,6 +9,8 @@ import ScheduledTask from './pages/ScheduledTask';
 import AddTask from './components/AddTask';
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage';
+import DashBoardPage from './pages/DashboardPage';
+
 
 
 function App() {
@@ -42,17 +45,21 @@ function App() {
   ]
   )
 
-  return (
-    <div className='w-full flex'>
-      <DashBoard />
-      <div className='flex grow flex-col w-4/5' style={{backgroundColor: '#e3e3e3'}}>
-        {/*Navigation bar*/}
-        <NavBar />
-        {/* Main Components */}
-        <RouterProvider router={router} />
+    return (
+      <div className='w-full flex'>
+        <DashBoard />
+        <div className='flex grow flex-col w-4/5' style={{backgroundColor: '#e3e3e3'}}>
+          {/*Navigation bar*/}
+          <NavBar />
+          {/* Main Components */}
+          {/* <RouterProvider router={router} /> */}
+          <RouterProvider router={router} />
+        </div>
       </div>
-    </div>
-  )
+
+    )
 }
 
 export default App
+
+

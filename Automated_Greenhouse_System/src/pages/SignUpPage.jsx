@@ -1,11 +1,11 @@
 import React from 'react'
 import SignUp from '../components/SignUp'
 
-const NoPage = () => {
+const SignUpPage = () => {
  
   return (
     <SignUp />
   )
 }
 
-export default NoPage
+export default SignUpPage
