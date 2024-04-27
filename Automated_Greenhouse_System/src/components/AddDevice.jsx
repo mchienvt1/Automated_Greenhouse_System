@@ -2,8 +2,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 
-const AddDeviceModal = ({ isOpen, onClose }) => {
-    if (!isOpen) return null; // Không hiển thị modal nếu isOpen là false
+export default function AddDeviceModal ({ isOpen, onClose }) {
+    if (!isOpen) return null; 
 
     // Xử lý sự kiện khi người dùng nhấp vào vùng ngoài của modal
     const handleBackgroundClick = (event) => {
@@ -62,7 +62,6 @@ const AddDeviceModal = ({ isOpen, onClose }) => {
                     />
                 </div>
 
-                {/* Nút Cancel và Add device */}
                 <div className="flex justify-center">
                     <button
                         className="mr-4 px-4 py-2 bg-gray-300 text-black rounded w-[120px]"
@@ -79,4 +78,4 @@ const AddDeviceModal = ({ isOpen, onClose }) => {
             </div>
         </div>
     );
-};
+}
