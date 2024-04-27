@@ -5,6 +5,9 @@ import WaterPump from '../assets/icons/WaterPump.png';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -179,12 +182,22 @@ export default function AddTask({ isOpen, onClose }) {
                     <p className='text-[#8F8F8F] font-semibold my-2 text-xl'>
                         Schedule
                     </p>
+                    
+                    <div className='px-20'>
+                        <p className='text-[#8F8F8F] font-semibold my-2 text-[16px]'>Name</p>
+                        <input type="text" className='border-2 border-gray-500 rounded-lg w-full px-2'/>
+                    </div>
 
                     <div className='flex justify-between px-20'>
                         <div>
                             <p className='text-[#8F8F8F] font-semibold my-2 text-[16px]'>From</p>
                             <input type="time" className='border-2 border-gray-500 rounded-lg'/>
                         </div>
+
+                        <div className='flex justify-center items-center pt-10'>
+                            <FontAwesomeIcon icon={faArrowRightLong} style={{ width: '25px', height: 'auto' }}/>
+                        </div>
+
 
                         <div>
                             <p className='text-[#8F8F8F] font-semibold my-2 text-[16px]' >To</p>
@@ -218,10 +231,20 @@ export default function AddTask({ isOpen, onClose }) {
                         Schedule
                     </p>
 
+                    <div className='px-20'>
+                        <p className='text-[#8F8F8F] font-semibold my-2 text-[16px]'>Name</p>
+                        <input type="text" className='border-2 border-gray-500 rounded-lg w-full px-2'/>
+                    </div>
+
                     <div className='flex justify-between px-20'>
+
                         <div>
                             <p className='text-[#8F8F8F] font-semibold my-2 text-[16px]'>From</p>
                             <input type="time" className='border-2 border-gray-500 rounded-lg'/>
+                        </div>
+
+                        <div className='flex justify-center items-center pt-10'>
+                            <FontAwesomeIcon icon={faArrowRightLong} style={{ width: '25px', height: 'auto' }}/>
                         </div>
 
                         <div>
@@ -233,7 +256,7 @@ export default function AddTask({ isOpen, onClose }) {
 
                 
 
-                <div className='justify-center flex my-6'>
+                <div className='justify-center flex mt-8'>
                     <button type="button" className="text-white bg-customGreen rounded-xl text-xl px-10 py-2 text-center me-2 mb-2 transition duration-300 ease-in-out hover:bg-green-600">
                         Add
                     </button>
