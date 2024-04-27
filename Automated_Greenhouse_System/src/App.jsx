@@ -9,6 +9,8 @@ import ScheduledTask from './pages/ScheduledTask';
 import AddTask from './components/AddTask';
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage';
+import DeviceManagementPage from './pages/DeviceManagementPage';
+
 
 
 
@@ -36,6 +38,10 @@ function App() {
     {
       path: "/scheduled_task/add_task",
       element: <AddTask />,
+    },
+    {
+      path: "/device_management",
+      element: <DeviceManagementPage />,
     },
     {
       path: '*',
