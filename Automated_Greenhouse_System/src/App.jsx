@@ -56,7 +56,6 @@ function App() {
           {/*Navigation bar*/}
           <NavBar />
           {/* Main Components */}
-          {/* <RouterProvider router={router} /> */}
           <RouterProvider router={router} />
         </div>
       </div>
