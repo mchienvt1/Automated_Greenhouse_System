@@ -1,34 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import DeviceCard from "../components/DeviceManagement/DeviceCard";
-import { get_array } from "../components/DeviceManagement/DeviceData";
+
 import AddDevice from "../components/AddDevice";
 
 export default function DeviceManagementPage() {
-    const [deviceData, setDeviceData] = useState([]);
-    const [lightDevices, setLightDevices] = useState([]);
-    const [waterPumpDevices, setWaterPumpDevices] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = get_array();
-            setDeviceData(data);
-        };
-
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        // Lọc các thiết bị loại "light"
-        const lightDevicesFiltered = deviceData.filter(device => device.type === "Light");
-        setLightDevices(lightDevicesFiltered);
-
-        // Lọc các thiết bị loại "water pump"
-        const waterPumpDevicesFiltered = deviceData.filter(device => device.type === "Water Pump");
-        setWaterPumpDevices(waterPumpDevicesFiltered);
-    }, [deviceData]);
-
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDetaiedCardOpen, setIsDetaiedCardOpen] = useState(false);
+
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -36,6 +15,14 @@ export default function DeviceManagementPage() {
 
     const closeModal = () => {
         setIsModalOpen(false);
+    };
+
+    const openDetailedCard = () => {
+        setIsDetaiedCardOpen(true);
+    };
+
+    const closeDetailedCard = () => {
+        setIsDetaiedCardOpen(true);
     };
 
     return (
@@ -47,24 +34,7 @@ export default function DeviceManagementPage() {
                         Add Device
                 </button>
             </div>
-            
-            <div className="p-5">
-                <h1 className="text-2xl font-semibold mb-4 text-customGreen">Light</h1>
-                
-                <div className="p-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-                    {lightDevices.map((item, index) => (
-                        <DeviceCard key={index} device={item} />
-                    ))}
-                </div>
-            </div>
-            <div className="p-5">
-                <h1 className="text-2xl font-semibold mb-4 text-customGreen">Water Pump</h1>
-                <div className="p-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-                    {waterPumpDevices.map((item, index) => (
-                        <DeviceCard key={index} device={item} />
-                    ))}
-                </div>
-            </div>
+            <DeviceCard />
             <AddDevice isOpen={isModalOpen} onClose={closeModal} />
         </div>
     );
