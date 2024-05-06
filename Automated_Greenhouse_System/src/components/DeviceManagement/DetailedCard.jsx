@@ -20,9 +20,9 @@ export default function DetailedCard({ device, isOpen, onClose }) {
     return (
         <div className="modal-background fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
         onClick={handleBackgroundClick}>
-            <div className="border rounded-lg p-4 shadow-md bg-white w-[300px] relative">
+            <div className="border rounded-lg p-4 shadow-md bg-white w-[320px] relative">
                 <div className='fixed'>
-                    <button className="absolute top-[-20px] right-[-290px] mt-4 mr-4" onClick={onClose}>
+                    <button className="absolute top-[-20px] right-[-310px] mt-4 mr-4" onClick={onClose}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600 hover:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -56,7 +56,7 @@ export default function DetailedCard({ device, isOpen, onClose }) {
                     </div>
                 </div>
 
-                <div className={(toggleState === 2 ? '' : 'hidden') }>
+                <div className={(toggleState === 2 ? '' : 'hidden')}>
                     {/* Input Name */}
                     <div className="mb-4">
                         <label htmlFor="name" className="block mb-2 font-semibold">Name:</label>
