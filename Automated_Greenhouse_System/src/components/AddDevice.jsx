@@ -12,12 +12,20 @@ export default function AddDeviceModal ({ isOpen, onClose }) {
         }
     };
 
+
     return (
         <div
             className="modal-background fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
             onClick={handleBackgroundClick}
         >
-            <div className="modal-content bg-white p-6 rounded-lg w-[430px]">
+            <div className="modal-content bg-white p-6 rounded-lg w-[430px] relative">
+                <div className='fixed'>
+                    <button className="absolute top-[-30px] right-[-410px] mt-4 mr-4" onClick={onClose}>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600 hover:text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
                 <h2 className="text-3xl font-bold mb-4 text-customGreen text-center">Add device</h2>
                 
                 {/* Input Name */}
@@ -64,13 +72,8 @@ export default function AddDeviceModal ({ isOpen, onClose }) {
 
                 <div className="flex justify-center">
                     <button
-                        className="mr-4 px-4 py-2 bg-gray-300 text-black rounded w-[120px]"
-                        onClick={onClose}
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        className="px-4 py-2 bg-customGreen text-white rounded w-[120px]"
+                        className="px-4 py-2 bg-customGreen text-white rounded w-[120px] hover:bg-green-600"
+                        
                     >
                         Add device
                     </button>
