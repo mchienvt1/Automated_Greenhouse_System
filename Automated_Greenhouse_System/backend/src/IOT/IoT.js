@@ -46,17 +46,21 @@ class IoTInterface {
     control(){
         return 
     };
-    activate(){
-        return
+    activate(device_id){
+        async function callAPI(){
+            publish(device_id, '1');
+        }
+        return callAPI
     };
-    deactivate(){
-        return
-    };  
-    control(){
-
+    deactivate(device_id){
+        async function callAPI(){
+            publish(device_id, '0');
+        }
+        return callAPI
+    };
+    getControl(device_id){
+        return {active: this.activate(device_id), deactive: this.deactivate(device_id)}
     }
 }
-
-
 
 module.exports = new IoTInterface();

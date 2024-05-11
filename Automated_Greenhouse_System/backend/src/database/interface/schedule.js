@@ -6,7 +6,7 @@ class ScheduleInterface{
     //     this.schedule = require('../model/schedule.js');
         this.count = 1;
     }
-    async createSchedule(user_id, device_id, task_id, description, time, action){
+    async createSchedule(user_id, device_id, description, time, action){
         try {
             const schedule = new Schedule ({
                 task_id : State.getScheduleIndex(),

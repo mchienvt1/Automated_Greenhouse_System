@@ -23,16 +23,25 @@ const scheduleTaskSchema = mongoose.Schema({
         type : String,
     },
     time : {
+        start : {
+            required : true,
+            type : Schedule
+        },
+        end : {
+            required : true,
+            type : Schedule
+        },
         required: true,
         type: Schedule
     },
     action : {
         required : true,
-        type : IoTInterface
+        type : Map,
     },
     deleted : {
         required : false,
         type : Boolean,
+        default : false
     }
 })
 
