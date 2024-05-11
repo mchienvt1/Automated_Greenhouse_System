@@ -1,5 +1,6 @@
 const mqtt = require('mqtt');
-const { username, key } = require('../config/env');
+const username = process.env.ADAFRUIT_USERNAME;
+const key = process.env.ADAFRUIT_KEY;
 
 const brokerUrl = `mqtts://${username}:${key}@io.adafruit.com`
 const options = { port : 443 }

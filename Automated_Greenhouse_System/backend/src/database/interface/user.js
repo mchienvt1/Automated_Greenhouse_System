@@ -1,18 +1,21 @@
 const { mutipleMongooseObject, mongooseToObject} = require('../utils/mongoose.js');
 const User  = require('../model/user.js');
+const { ListCollectionsCursor } = require('mongodb');
 class UserInterface{
     constructor(){
         // this.schedule = require('../model/schedule.js');
         this.count = 0
     }
 
-    async createUser(username, password, link){
+    async createUser(username, password, link, email, fullname){
         try {
             const newUser = new User ({
                 user_id : this.count++,
                 username : username,
                 password : password,
                 link_to_avatar : link,
+                email : email,
+                fullname : fullname, 
                 DeviceList : [],
                 TaskList : []
             });
@@ -65,6 +68,18 @@ class UserInterface{
             return await this.user.findOne({user_id : user_id}).select('DeviceList').next({ mutipleMongooseObject, mongooseToObject});
         } catch (error) {
             // Handle error
+        }
+    }
+
+    async getUserbyUsername(username){
+        try {
+            return await this.user.findOne({username : username});
+        } catch (error) {
+            // Handle error
+            console.log(error);
+        } finally {
+            return  null;
+            // Handle finally
         }
     }
 }

@@ -14,6 +14,16 @@ class LogController {
             res.status(500).send('Internal Server Error')
         }
     }
+    async getLastLog(req, res) {
+        try {
+            const device_id = '1';
+            const log = await Log.getLastLog(device_id);
+            return res.status(200).json(log);
+        } catch (error){
+            console.log(error)
+            res.status(500).send('Internal Server Error')
+        }
+    }
 }
 
 module.exports = new LogController();
