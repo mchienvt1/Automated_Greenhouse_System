@@ -122,7 +122,6 @@ export default function AddTask({ isOpen, onClose }) {
                         </svg>
                     </button>
                 </div>
-
                 
                 <div className='px-[9rem] flex'>
                     <div className={'border-2 border-[#8F8F8F] rounded-lg mr-auto py-1 w-[120px] font-semibold flex items-center justify-center transition-colors duration-150 ease-in-out hover: text-gray-700 hover:border-gray-700 ' + (selected == 0 ? "bg-customGreen text-white" : "text-[#8F8F8F]")}
