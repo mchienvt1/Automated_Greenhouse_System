@@ -16,7 +16,7 @@ let item_1 = {
     location: "Garden 1",
     img: LightBulb,
     type: "Light",
-    status: false,
+    feed_id: 'led1',
 };
 
 let item_2 = {
@@ -25,7 +25,7 @@ let item_2 = {
     location: "Garden 1",
     img: LightBulb,
     type: "Light",
-    status: false,
+    feed_id: 'led2',
 };
 
 let item_3 = {
@@ -34,7 +34,7 @@ let item_3 = {
     location: "Garden 1",
     img: LightBulb,
     type: "Light",
-    status: false,
+    feed_id: 'led3',
 };
 
 let item_4 = {
@@ -43,7 +43,7 @@ let item_4 = {
     location: "Garden 2",
     img: LightBulb,
     type: "Light",
-    status: false,
+    feed_id: 'led4',
 };
 
 let item_5 = {
@@ -52,7 +52,7 @@ let item_5 = {
     location: "Garden 2",
     img: LightBulb,
     type: "Light",
-    status: false,
+    feed_id: 'led5',
 };
 
 let item_6 = {
@@ -61,7 +61,7 @@ let item_6 = {
     location: "Garden 2",
     img: LightBulb,
     type: "Light",
-    status: false,
+    feed_id: 'led6',
 };
 
 let item_7 = {
@@ -70,7 +70,7 @@ let item_7 = {
     location: "Garden 2",
     img: LightBulb,
     type: "Light",
-    status: false,
+    feed_id: 'led7',
 };
 
 // let item_8 = {
@@ -88,7 +88,7 @@ let item_9 = {
     location: "Garden 1",
     img: WaterPump,
     type: "Water Pump",
-    status: false,
+    feed_id: 'pumper1',
 };
 
 let item_10 = {
@@ -97,7 +97,7 @@ let item_10 = {
     location: "Garden 1",
     img: WaterPump,
     type: "Water Pump",
-    status: false,
+    feed_id: 'pumper2',
 };
 
 let item_11 = {
@@ -106,7 +106,7 @@ let item_11 = {
     location: "Garden 2",
     img: WaterPump,
     type: "Water Pump",
-    status: false,
+    feed_id: 'pumper3',
 };
 
 let item_12 = {
@@ -115,7 +115,7 @@ let item_12 = {
     location: "Garden 2",
     img: WaterPump,
     type: "Water Pump",
-    status: false,
+    feed_id: 'pumper4',
 };
 
 let item_13 = {
@@ -124,7 +124,7 @@ let item_13 = {
     location: "Garden 2",
     img: WaterPump,
     type: "Water Pump",
-    status: false,
+    feed_id: 'pumper5',
 };
 
 let dataArray = [

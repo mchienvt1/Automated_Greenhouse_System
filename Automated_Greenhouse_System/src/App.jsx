@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import HomePage from "./pages/HomePage";
 import NoPage from "./pages/NoPage";
 import NavBar from "./components/NavBar";
@@ -46,19 +46,21 @@ function App() {
   ]);
 
   return (
-    <div className="flex w-full" style={{ backgroundColor: "#e3e3e3" }}>
-      <DashBoard
-        toggleSidebar={toggleSidebar}
-        setToggleSidebar={setToggleSidebar}
-      />
-      <div className="flex-grow">
-        <NavBar
-          setToggleSidebar={setToggleSidebar}
+    <div className='w-full flex'>
+        <DashBoard
           toggleSidebar={toggleSidebar}
+          setToggleSidebar={setToggleSidebar}
         />
-        <RouterProvider router={router} />
+        <div className='flex grow flex-col w-4/5' style={{backgroundColor: '#e3e3e3'}}>
+          {/*Navigation bar*/}
+          <NavBar
+            setToggleSidebar={setToggleSidebar}
+            toggleSidebar={toggleSidebar}
+          />
+          {/* Main Components */}
+          <RouterProvider router={router} />
+        </div>
       </div>
-    </div>
   );
 }
 

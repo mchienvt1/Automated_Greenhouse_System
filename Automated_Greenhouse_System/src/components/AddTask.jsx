@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LightBulb from '../assets/icons/light_bulb.png';
 import WaterPump from '../assets/icons/WaterPump.png';
@@ -10,6 +10,9 @@ import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { useGlobalContext } from './context';
+import { get_array } from "./DeviceManagement/DeviceData";
+
 
 const lightList = [{
     id: 1,
@@ -102,6 +105,54 @@ const waterPumpList = [{
 ];
 
 export default function AddTask({ isOpen, onClose }) {
+    const {lightBtn,pumperBtn} = useGlobalContext()
+    
+    const devices= [
+        { 
+            id: "2001",
+            name: "Water Pump 1",
+            location: "Garden 1",
+            img: WaterPump,
+            type: "Water Pump",
+            feed_id: 'pumper',
+            value: pumperBtn === '1'? true:false
+        },
+        { 
+            id: "1001",
+            name: "Light 1",
+            location: "Garden 1",
+            img: LightBulb,
+            type: "Light",
+            feed_id: 'led',
+            value: lightBtn === '1'? true:false
+        },
+    ]
+
+    const [deviceData, setDeviceData] = useState([]);
+    const [lightDevices, setLightDevices] = useState([]);
+    const [waterPumpDevices, setWaterPumpDevices] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = get_array();
+            setDeviceData(data);
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        // Lọc các thiết bị loại "light"
+        const lightDevicesFiltered = devices.filter(device => device.feed_id === "led");
+        const additionalLightDevices = deviceData.filter(device => device.type === "Light"); 
+        setLightDevices([...lightDevicesFiltered, ...additionalLightDevices]);
+
+        // Lọc các thiết bị loại "water pump"
+        const waterPumpDevicesFiltered = devices.filter(device => device.feed_id === "pumper");
+        const additionalWaterPumpDevices = deviceData.filter(device => device.type === "Water Pump"); 
+        setWaterPumpDevices([...waterPumpDevicesFiltered, ...additionalWaterPumpDevices]);
+    }, [deviceData]);
+
     const [selected, setSelected] = useState(0);
     const [deviceSelected, setDeviceSelected] = useState(0);
 
@@ -167,13 +218,13 @@ export default function AddTask({ isOpen, onClose }) {
                         onSlideChange={() => console.log('slide change')}
                         onSwiper={(swiper) => console.log(swiper)}
                     >
-                        {lightList.map((item, index) => (
+                        {lightDevices.map((item, index) => (
                             <SwiperSlide
                                 key={index}
                                 onClick={() => setDeviceSelected(index)}
                                 className={'device-item border-2 rounded-lg mr-4 p-2 mb-10 ' + (deviceSelected === index ? "border-[#00C443]" : "border-black")}
                             >
-                                <img src={item.icon} alt="icon" className="w-auto h-[110px] mx-auto mb-2" />
+                                <img src={item.img} alt="icon" className="w-auto h-[110px] mx-auto mb-2" />
                                 <span className="block text-center">{item.name}</span>
                             </SwiperSlide>
                         ))}
@@ -215,13 +266,13 @@ export default function AddTask({ isOpen, onClose }) {
                         onSlideChange={() => console.log('slide change')}
                         onSwiper={(swiper) => console.log(swiper)}
                     >
-                        {waterPumpList.map((item, index) => (
+                        {waterPumpDevices.map((item, index) => (
                             <SwiperSlide
                                 key={index}
                                 onClick={() => setDeviceSelected(index)}
                                 className={'device-item border-2 rounded-lg mr-4 p-2 mb-10 ' + (deviceSelected === index ? "border-[#00C443]" : "border-black")}
                             >
-                                <img src={item.icon} alt="icon" className="w-auto h-[110px] mx-auto mb-2" />
+                                <img src={item.img} alt="icon" className="w-auto h-[110px] mx-auto mb-2" />
                                 <span className="block text-center">{item.name}</span>
                             </SwiperSlide>
                         ))}
