@@ -3,19 +3,20 @@ const route = require('./routes/index.js');
 const app  = express()
 const db = require('./database/config/index.js');
 const IoTInterface  = require('./IOT/IoT.js');
+// var bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8080;
 const cors = require('cors');
 require('dotenv').config({ path: '../.env' });
 db.connect();
 
+
+app.use(cors());
+app.use(express.json());
 app.use(
     express.urlencoded({
         extended: true
     }),
 );
-
-app.use(express.json());
-app.use(cors());
 
 route(app)
 
