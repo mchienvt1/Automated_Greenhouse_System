@@ -1,6 +1,36 @@
 import React, { useState, useEffect } from 'react';
+import { useGlobalContext } from './context';
 
 const Average = () => {
+
+    const {temperature,humidity,lightIntensity,soilHumidity} = useGlobalContext();
+    const roundedTemperature = Math.round(temperature);
+    const roundedHumidity = Math.round(humidity);
+    const roundedLightIntensity = Math.round(lightIntensity);
+    const roundedSoilHumidity = Math.round(soilHumidity);
+
+    const [temperatureValues, setTemperatureValues] = useState([]);
+    const [humidityValues, setHumidityValues] = useState([]);
+    const [lightIntensityValues, setLightIntensityValues] = useState([]);
+    const [soilHumidityValues, setSoilHumidityValues] = useState([]);
+
+    useEffect(() => {
+        setTemperatureValues(prevValues => [...prevValues, roundedTemperature]);
+        setHumidityValues(prevValues => [...prevValues, roundedHumidity]);
+        setLightIntensityValues(prevValues => [...prevValues, roundedLightIntensity]);
+        setSoilHumidityValues(prevValues => [...prevValues, roundedSoilHumidity]);
+    }, [roundedTemperature, roundedHumidity, roundedLightIntensity, roundedSoilHumidity]);
+
+    const calculateAverage = (values) => {
+        if (values.length === 0) return 0;
+        const sum = values.reduce((a, b) => a + b, 0);
+        return Math.round(sum / values.length);
+    };
+
+    const averageTemperature = calculateAverage(temperatureValues);
+    const averageHumidity = calculateAverage(humidityValues);
+    const averageLightIntensity = calculateAverage(lightIntensityValues);
+    const averageSoilHumidity = calculateAverage(soilHumidityValues);
 
     return (
         <div className="bg-white rounded-lg mx-5 my-2 w-[315px]">
@@ -18,7 +48,7 @@ const Average = () => {
                             <span className='text-[30px]'>💧</span>
                             <span className='font-semibold'>Hudminity</span>
                         </div>
-                        <span className='font-semibold text-[#00C2FF]'> %</span>
+                        <span className='font-semibold text-[#00C2FF]'>{averageHumidity} %</span>
                     </div>
 
                     <div className='flex justify-between items-center'>
@@ -26,7 +56,7 @@ const Average = () => {
                             <span className='text-[30px]'>🌡️</span>
                             <span className='font-semibold'>Temperature</span>
                         </div>
-                        <span className='font-semibold text-[#FF2E00]'> ℃</span>
+                        <span className='font-semibold text-[#FF2E00]'>{averageTemperature} ℃</span>
                     </div>
 
                     <div className='flex justify-between items-center'>
@@ -34,7 +64,7 @@ const Average = () => {
                             <span className='text-[30px]'>☀️</span> 
                             <span className='font-semibold'>Light</span>
                         </div>
-                        <span className='font-semibold text-customGreen'> Lux</span>
+                        <span className='font-semibold text-customGreen'>{averageLightIntensity} Lux</span>
                     </div>
                     
                     <div className='flex justify-between items-center'>
@@ -42,7 +72,7 @@ const Average = () => {
                             <span className='text-[30px]'>🌱</span> 
                             <span className='font-semibold'>Soil</span>
                         </div>
-                        <span className='font-semibold text-customBrown'> % </span>
+                        <span className='font-semibold text-customBrown'>{averageSoilHumidity} % </span>
                     </div>
                 </div>
                 

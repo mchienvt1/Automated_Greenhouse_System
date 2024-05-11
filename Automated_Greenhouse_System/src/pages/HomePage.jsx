@@ -48,7 +48,7 @@ const HomePage = () => {
 
                     <EnvironmentalCards />
                     <MyCalendar />
-                    <ManualControl />
+                    {/* <ManualControl /> */}
 
                 </div>
                 <div className="flex flex-cols-2">

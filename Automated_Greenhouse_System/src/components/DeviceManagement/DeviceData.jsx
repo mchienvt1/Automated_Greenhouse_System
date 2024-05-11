@@ -1,14 +1,14 @@
 import LightBulb from '../../assets/icons/light_bulb.png';
 import WaterPump from '../../assets/icons/WaterPump.png';
 
-let item_0 = {
-    id: "1001",
-    name: "Light 1",
-    location: "Garden 1",
-    img: LightBulb,
-    type: "Light",
-    status: false,
-};
+// let item_0 = {
+//     id: "1001",
+//     name: "Light 1",
+//     location: "Garden 1",
+//     img: LightBulb,
+//     type: "Light",
+//     status: false,
+// };
 
 let item_1 = {
     id: "1002",
@@ -73,14 +73,14 @@ let item_7 = {
     status: false,
 };
 
-let item_8 = {
-    id: "2001",
-    name: "Water Pump 1",
-    location: "Garden 1",
-    img: WaterPump,
-    type: "Water Pump",
-    status: false,
-};
+// let item_8 = {
+//     id: "2001",
+//     name: "Water Pump 1",
+//     location: "Garden 1",
+//     img: WaterPump,
+//     type: "Water Pump",
+//     status: false,
+// };
 
 let item_9 = {
     id: "2002",
@@ -128,7 +128,7 @@ let item_13 = {
 };
 
 let dataArray = [
-    item_0,
+    //item_0,
     item_1,
     item_2,
     item_3,
@@ -136,7 +136,7 @@ let dataArray = [
     item_5,
     item_6,
     item_7,
-    item_8,
+    //item_8,
     item_9,
     item_10,
     item_11,
