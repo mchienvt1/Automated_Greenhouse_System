@@ -47,7 +47,6 @@ const HomePage = () => {
     }
   });
 
-<<<<<<< HEAD
     return (
         <div className='flex flex-row'>
             <div className='w-5/5' style={{backgroundColor: '#e3e3e3', width: '100%'}}>
@@ -64,39 +63,8 @@ const HomePage = () => {
                     <Average />
                 </div>
             </div>
-=======
-  return (
-    <>
-      <div className="w-full p-5">
-        <div className="grid grid-cols-1 gap-8 pb-5 md:grid-cols-12">
-          <div className="col-span-12 lg:col-span-6">
-            <EnvironmentalCards />
-          </div>
-          <div className="col-span-12 lg:col-span-4">
-            <MyCalendar />
-          </div>
-          <div className="col-span-12 lg:col-span-2">
-            <ManualControl />
-          </div>
-          <div className="col-span-12 md:col-span-8">
-            <ChartComponent />
-          </div>
-          <div className="col-span-12 md:col-span-4">
-            <Average />
-          </div>
->>>>>>> c754681ef5135e9a1c2e160f1b4c66bf5077e9a9
         </div>
 
-        {/* <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
-          <div className="col-span-12 md:col-span-8">
-            <ChartComponent />
-          </div>
-          <div className="col-span-12 md:col-span-4">
-            <Average />
-          </div>
-        </div> */}
-      </div>
-    </>
   );
 };
 export default HomePage;
