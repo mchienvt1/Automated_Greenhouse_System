@@ -47,24 +47,35 @@ const HomePage = () => {
     }
   });
 
-    return (
-        <div className='flex flex-row'>
-            <div className='w-5/5' style={{backgroundColor: '#e3e3e3', width: '100%'}}>
-                {/* Main Components */}
-                <div className="flex flex-cols-3">
-
-                    <EnvironmentalCards />
-                    <MyCalendar />
-                    {/* <ManualControl /> */}
-
-                </div>
-                <div className="flex flex-cols-2">
-                    <ChartComponent/>
-                    <Average />
-                </div>
-            </div>
+  return (
+    <>
+      <div className="p-5">
+        <div className="grid grid-cols-1 gap-5 pb-5 md:grid-cols-12">
+          <div className="col-span-12 lg:col-span-8">
+            <EnvironmentalCards />
+          </div>
+          <div className="col-span-12 lg:col-span-4">
+            <MyCalendar />
+          </div>
+  
+          <div className="col-span-12 md:col-span-8">
+            <ChartComponent />
+          </div>
+          <div className="col-span-12 md:col-span-4">
+            <Average />
+          </div>
         </div>
 
+        {/* <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
+          <div className="col-span-12 md:col-span-8">
+            <ChartComponent />
+          </div>
+          <div className="col-span-12 md:col-span-4">
+            <Average />
+          </div>
+        </div> */}
+      </div>
+    </>
   );
 };
 export default HomePage;
