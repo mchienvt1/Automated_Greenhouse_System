@@ -5,7 +5,6 @@ const Log = require('../database/interface/log');
 
 class IoTInterface {
     constructor() { 
-        // Some data to be filled
     }
     async getLastValue(feed_id){
         const username = process.env.VITE_ADAFRUIT_USERNAME;

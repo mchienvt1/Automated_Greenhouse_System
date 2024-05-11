@@ -1,10 +1,12 @@
 const Log= require('../model/log')
 const { mutipleMongooseObject, mongooseToObject} = require('../utils/mongoose.js');
 const state = require('../config/state.json');
-
+const fs = require('fs');
 class LogInterface{
     constructor(){
-        this.count = 37;
+        this.configFile = fs.readFileSync('src/database/config/state.json');
+        this.config = JSON.parse(this.configFile);
+        this.count = this.config.log.index;
     }
     async createLog(device_id, data_retrieve, time){
         try{
@@ -33,6 +35,9 @@ class LogInterface{
             })
             console.log(`Log added ${this.count}`)
             await log.save()
+            this.count++;
+            this.config.log.index = this.count;
+            fs.writeFileSync('../config/state.json', JSON.stringify(this.config, null, 2));
             return log
 
         }catch(error){
