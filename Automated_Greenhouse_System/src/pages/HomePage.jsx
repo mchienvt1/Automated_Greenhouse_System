@@ -56,7 +56,6 @@ const HomePage = () => {
           </div>
           <div className="col-span-12 lg:col-span-4">
             <MyCalendar />
-            
           </div>
           <div className="col-span-12 md:col-span-8">
             <ChartComponent />
