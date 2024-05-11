@@ -31,6 +31,18 @@ const deviceSchema = mongoose.Schema({
         type: String,
         required: false
     },
+    control : {
+        'light' : {
+            type : Boolean,
+            required : true
+        },
+        'pump' : {
+            type : Boolean,
+            required : true
+        },
+
+    }
+    ,
     task : {
         type : Array,
         required : true

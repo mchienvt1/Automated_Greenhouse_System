@@ -5,6 +5,7 @@ const db = require('./database/config/index.js');
 const IoTInterface  = require('./IOT/IoT.js');
 const PORT = process.env.PORT || 8080;
 const cors = require('cors');
+require('dotenv').config({ path: '../.env' });
 db.connect();
 
 app.use(

@@ -9,7 +9,6 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -33,14 +32,6 @@ const SignUp = () => {
 
   const handleToggleShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
-  };
-
-  const handleSignUp = () => {
-    console.log('Username:', username);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Confirm Password:', confirmPassword);
-    navigate('/')
   };
 
   return (
@@ -116,16 +107,16 @@ const SignUp = () => {
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <button
+          <a
             className="bg-[#81D081] hover:bg-[#66BB66] text-white font-bold py-2 px-12 rounded focus:outline-none focus:shadow-outline mr-2"
             type="button"
-            onClick={handleSignUp}
+            href='/'
           >
             Sign Up
-          </button>
+          </a>
         </div>
         <div className="text-center mt-4">
-          <span className="text-gray-700 text-sm">Already have an account? <Link to="/" className="text-cyan-500">Login</Link></span>
+          <span className="text-gray-700 text-sm">Already have an account? <a href="/" className="text-cyan-500">Login</a></span>
         </div>
       </div>
     </div>

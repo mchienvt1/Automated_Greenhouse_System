@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; 
-import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
-
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate();
-
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
     };
@@ -22,14 +18,7 @@ const Login = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleLogin = () => {
-        console.log('Username:', username);
-        console.log('Password:', password);
-        navigate('/home');
-    };
-
     return (
-    <div className="flex justify-center items-center h-screen bg-[#81D081]">
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[350px]">
             <h2 className="text-2xl font-bold mb-4 text-center">Login</h2> 
             <div className="mb-4">
@@ -67,19 +56,18 @@ const Login = () => {
                 </div>
             </div>
             <div className="flex items-center justify-center"> 
-                <button
+                <a
                     className="bg-[#81D081] hover:bg-[#66BB66] text-white font-bold py-2 px-12 rounded focus:outline-none focus:shadow-outline mr-2"
                     type="button"
-                    onClick={handleLogin}
+                    href='/dashboard'
                 >
                 Login
-                </button>
+                </a>
             </div>
             <div className="text-center mt-4"> 
-                <span className="text-gray-700 text-sm">Don't have an account? <Link to="/signup" className="text-cyan-500">Sign up</Link></span>
+                <span className="text-gray-700 text-sm">Don't have an account? <a href="/signup" className="text-cyan-500">Sign up</a></span>
             </div>
         </div>
-    </div>
     );
 };
 
