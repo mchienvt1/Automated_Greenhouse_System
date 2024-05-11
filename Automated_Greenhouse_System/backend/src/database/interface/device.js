@@ -1,6 +1,6 @@
 const { mongooseToObject, mutipleMongooseObject} = require('../utils/mongoose.js');
 const Device = require('../model/device.js');
-
+const State = require('../config/state.js')
 class DeviceInterface{
     constructor(){
         this.count = 0;
@@ -8,7 +8,7 @@ class DeviceInterface{
     async createDevice(name, img, location){
         try {
             const newDevice = new Device({
-                device_id : this.count++,
+                device_id : State.getDeviceIndex(),
                 name : name,
                 status : "OFF",
                 image : img,
