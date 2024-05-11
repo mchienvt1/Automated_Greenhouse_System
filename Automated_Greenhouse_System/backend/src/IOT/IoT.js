@@ -26,14 +26,14 @@ class IoTInterface {
     async pullData(device_id) {
         const data_retrieve ={
             temperature: await this.getLastValue('temperature'),
-            // soilHumidity: await this.getLastValue('soil-humidity'),
-            // lightIntensity: await this.getLastValue('light'),
-            // humidity: await this.getLastValue('humidity'),
-            // lightBtn: await this.getLastValue('led'),
-            // pumperBtn: await this.getLastValue('pumper')
+            soilHumidity: await this.getLastValue('soil-humidity'),
+            lightIntensity: await this.getLastValue('light'),
+            humidity: await this.getLastValue('humidity'),
+            lightBtn: await this.getLastValue('led'),
+            pumperBtn: await this.getLastValue('pumper')
         }
         // console.log(data_retrieve);
-        // return await this.store(device_id, data_retrieve);
+        return await this.store(device_id, data_retrieve);
     };
     async store(device_id, data_retrieve){
         try {
