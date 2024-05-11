@@ -1,13 +1,7 @@
 const Log= require('../model/log')
 const { mutipleMongooseObject, mongooseToObject} = require('../utils/mongoose.js');
-const state = require('../config/state.json');
-const fs = require('fs');
+const State = require('../config/index.js');
 class LogInterface{
-    constructor(){
-        this.configFile = fs.readFileSync('src/database/config/state.json');
-        this.config = JSON.parse(this.configFile);
-        this.count = this.config.log.index;
-    }
     async createLog(device_id, data_retrieve, time){
         try{
             const datatype = {
@@ -26,18 +20,18 @@ class LogInterface{
                 LIGHT : data_retrieve.lightBtn,
                 PUMP : data_retrieve.pumperBtn
             }
+            const id = State.getLogIndex();
             const log = new Log({
-                log_id : this.count++,
+                log_id : id,
                 device_id : device_id,
                 time : time,
                 value :value,
                 controlStatus : controlStatus
             })
-            console.log(`Log added ${this.count}`)
+    
+            console.log(`[*] Log ${id} added at ${time}`)
             await log.save()
-            this.count++;
-            this.config.log.index = this.count;
-            fs.writeFileSync('../config/state.json', JSON.stringify(this.config, null, 2));
+            // fs.writeFileSync('src/database/config/state.json', JSON.stringify(this.config, null, 2));
             return log
 
         }catch(error){

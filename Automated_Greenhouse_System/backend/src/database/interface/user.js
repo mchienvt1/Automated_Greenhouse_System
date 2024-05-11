@@ -1,10 +1,13 @@
 const { mutipleMongooseObject, mongooseToObject} = require('../utils/mongoose.js');
 const User  = require('../model/user.js');
 const { ListCollectionsCursor } = require('mongodb');
+const fs = require('fs');
 class UserInterface{
     constructor(){
         // this.schedule = require('../model/schedule.js');
-        this.count = 0
+        this.configFile = fs.readFileSync('src/database/config/state.json');
+        this.config = JSON.parse(this.configFile);
+        this.count = this.config.user.index;
     }
 
     async createUser(username, password, link, email, fullname){
@@ -20,11 +23,13 @@ class UserInterface{
                 TaskList : []
             });
             await newUser.save();
-            console.log(newUser)
-            console.log('Create user successfully');
+            // console.log(newUser)
+            this.config.user.index = this.count;
+            // fs.writeFileSync('src/database/config/state.json', JSON.stringify(this.config, null, 2));
+            // console.log('Create user successfully');
         } catch (error) {
             // Handle error
-            console.log('Fail to create user')
+            // console.log('Fail to create user')
             console.log(error);
             return null;
         }
@@ -88,8 +93,6 @@ class UserInterface{
             return User.findOne({username : username});
         } catch (error) {
             console.log(error);
-            return null;
-        } finally {
             return null;
         }
     }

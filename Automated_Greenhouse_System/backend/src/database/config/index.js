@@ -1,12 +1,31 @@
-const mongoose = require('mongoose');
+const fs = require('fs');
 
-async function connect() {
-    try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/AGS');
-        console.log('Database connected');
-    } catch (error) {
-        console.log('Connect database failed');
+
+class State{
+    constructor(){
+        this.configFile = fs.readFileSync('src/database/config/state.json');
+        this.config = JSON.parse(this.configFile);
+    }
+    getLogIndex(){
+        return this.config.log.index++;
+    }
+    getUserIndex(){
+        return this.config.user.index++;
+    }
+    getDeviceIndex(){
+        return this.config.device.index++;
+    }
+    getScheduleIndex(){
+        return this.config.schedule.index++;
+    }
+    getTaskIndex(){
+        return this.config.task.index++;
+    }
+    saveConfig(){
+        fs.writeFileSync('src/database/config/state.json', JSON.stringify(this.config, null, 2));
+        console.log('Config saved')
+        console.log(this.config)
     }
 }
 
-module.exports = { connect }
+module.exports = new State();

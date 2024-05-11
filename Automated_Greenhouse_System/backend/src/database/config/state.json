@@ -1,1 +1,11 @@
-{ "log" : {"index" : 38}}
+{
+  "log": {
+    "index": 10
+  },
+  "user": {
+    "index": 0
+  },
+  "device": {
+    "index": 0
+  }
+}

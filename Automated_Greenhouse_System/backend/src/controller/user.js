@@ -6,8 +6,9 @@ class UserController {
         try {
             const { username, password } = req.body;
             const user = await User.getUserByUsername(username);
+            console.log(user)
             if (!user) {
-                return res.status(404).send({msg : 'User doesnot exist'});
+                return res.status(404).send({msg : 'User does not exist'});
             }   
             if (await bcrypt.compare(password, user.password)){
                 var resUser = {
