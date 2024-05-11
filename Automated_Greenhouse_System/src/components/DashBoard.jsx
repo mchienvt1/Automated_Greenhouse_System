@@ -39,8 +39,8 @@ const navLinks = [
 ];
 
 const variants = {
-  expanded: { width: "40%" },
-  nonExpanded: { width: "10%" },
+  expanded: { width: "20%" },
+  nonExpanded: { width: "5%" },
 };
 
 const DashBoard = ({ toggleSidebar, setToggleSidebar }) => {
