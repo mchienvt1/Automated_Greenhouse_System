@@ -5,12 +5,10 @@ const Log = require('../database/interface/log');
 
 class IoTInterface {
     constructor() { 
-        // Some data to be filled
     }
     async getLastValue(feed_id){
         const username = process.env.VITE_ADAFRUIT_USERNAME;
         const key = process.env.VITE_ADAFRUIT_KEY;
-        console.log(username, key);
         const url = `https://io.adafruit.com/api/v2/${username}/feeds/${feed_id}/data/last`;
         const options = {
             headers: {

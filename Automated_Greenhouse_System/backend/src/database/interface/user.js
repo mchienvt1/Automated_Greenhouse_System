@@ -1,16 +1,15 @@
 const { mutipleMongooseObject, mongooseToObject} = require('../utils/mongoose.js');
 const User  = require('../model/user.js');
-const { ListCollectionsCursor } = require('mongodb');
+const State = require('../config/state.js');
+const { getTime } = require('../../utils/syslog.js');
 class UserInterface{
     constructor(){
-        // this.schedule = require('../model/schedule.js');
-        this.count = 0
     }
 
     async createUser(username, password, link, email, fullname){
         try {
             const newUser = new User ({
-                user_id : this.count++,
+                user_id : State.getUserIndex(),
                 username : username,
                 password : password,
                 link_to_avatar : link,
@@ -20,11 +19,10 @@ class UserInterface{
                 TaskList : []
             });
             await newUser.save();
-            console.log(newUser)
-            console.log('Create user successfully');
+            console.log(`[*] User <${username}> added at ${getTime()}`);
         } catch (error) {
             // Handle error
-            console.log('Fail to create user')
+            // console.log('Fail to create user')
             console.log(error);
             return null;
         }
@@ -88,8 +86,6 @@ class UserInterface{
             return User.findOne({username : username});
         } catch (error) {
             console.log(error);
-            return null;
-        } finally {
             return null;
         }
     }

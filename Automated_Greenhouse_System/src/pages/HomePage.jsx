@@ -8,11 +8,13 @@ import ChartComponent from "../components/Chart";
 import MyCalendar from "../components/Calendar";
 import Average from "../components/Average";
 import ManualControl from "../components/ManualControl";
+import axios from "axios";
 const HomePage = () => {
   useEffect(() => {
     document.title = "Home";
   });
-
+  const logs = axios.get('/api/log/');
+  console.log(logs);
   const {
     setTemperature,
     setLightIntensity,
