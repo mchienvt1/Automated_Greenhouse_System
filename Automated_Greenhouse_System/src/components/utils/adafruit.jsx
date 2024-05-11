@@ -1,6 +1,7 @@
 import mqtt from "precompiled-mqtt";
 import { username,key } from "./env";
 
+console.log(username, key)
 const brokerUrl = `mqtts://${username}:${key}@io.adafruit.com`
 const options = {
     port: 443
