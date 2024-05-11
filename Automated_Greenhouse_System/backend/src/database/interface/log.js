@@ -1,6 +1,6 @@
 const Log= require('../model/log')
 const { mutipleMongooseObject, mongooseToObject} = require('../utils/mongoose.js');
-const State = require('../config/index.js');
+const State = require('../config/state.js');
 class LogInterface{
     async createLog(device_id, data_retrieve, time){
         try{

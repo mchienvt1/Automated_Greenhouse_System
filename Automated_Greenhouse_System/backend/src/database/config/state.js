@@ -1,6 +1,4 @@
 const fs = require('fs');
-
-
 class State{
     constructor(){
         this.configFile = fs.readFileSync('src/database/config/state.json');

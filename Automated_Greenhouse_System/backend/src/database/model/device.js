@@ -40,7 +40,6 @@ const deviceSchema = mongoose.Schema({
             type : Boolean,
             required : true
         },
-
     }
     ,
     task : {
