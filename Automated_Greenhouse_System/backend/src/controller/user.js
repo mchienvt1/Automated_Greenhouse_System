@@ -31,11 +31,12 @@ class UserController {
         try {
             const {username , password, email, fullname} = req.body;
             const user = await User.getUserByUsername(username);    
-            if (user){
+            if (user != null){
                 return res.status(404).send({msg : 'User already exist'});
             }
-            console.log(req)
-            console.log(username, password, email, fullname)
+            console.log(user)
+            // console.log(req)
+            // console.log(username, password, email, fullname)
             const hashPassword = await bcrypt.hash(password, 10);
             await User.createUser(username, hashPassword, "", email, fullname);
             return res.status(200).send({msg : 'Create user successfully'});
