@@ -7,15 +7,9 @@ function getTime(){
 function cleanup() {
     console.log(`[*] Server Stopped at ${getTime()}`);
     State.saveConfig();
-    process.exit();
 }
 function  gracefulShutdown() {
-    process.once('SIGNUP', () => {
-        cleanup();
-    });
-    // Listen for the 'exit' event on the process object
-    process.on('SIGINT', cleanup)
-    process.on('SIGTERM', cleanup)
+    process.once('SIGINT', cleanup)
 }
 
 module.exports = { getTime , gracefulShutdown}

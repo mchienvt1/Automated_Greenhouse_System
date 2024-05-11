@@ -1,11 +1,14 @@
 {
   "log": {
-    "index": 211
+    "index": 31
   },
   "user": {
     "index": 2
   },
   "device": {
+    "index": 0
+  },
+  "schedule": {
     "index": 0
   }
 }

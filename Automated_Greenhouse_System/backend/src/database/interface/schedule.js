@@ -1,6 +1,6 @@
 const { mutipleMongooseObject, mongooseToObject} = require('../utils/mongoose.js');
 const Schedule = require('../model/schedule.js');
-
+const State = require('../config/state.js');
 class ScheduleInterface{
     constructor(){
     //     this.schedule = require('../model/schedule.js');
@@ -9,7 +9,7 @@ class ScheduleInterface{
     async createSchedule(user_id, device_id, task_id, description, time, action){
         try {
             const schedule = new Schedule ({
-                task_id : this.count++,
+                task_id : State.getScheduleIndex(),
                 user_id : user_id,
                 device_id : device_id,
                 task_id : task_id,
@@ -45,7 +45,7 @@ class ScheduleInterface{
     }
     async getByDevice(device_id){
         try {
-            return await Schedule.find({device_id : device_id}).then(
+            return await Schedule.find({device_id : device_id}).sort({time :-1}).then(
                 (tasklist) => mutipleMongooseObject(tasklist)
             );
         } catch (error) {
