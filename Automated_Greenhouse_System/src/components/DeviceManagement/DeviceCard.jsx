@@ -1,12 +1,40 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import ReactSwitch from "react-switch";
-import { onChangeItem } from "./DeviceData";
+
 import DetailedCard from "./DetailedCard";
 import InforIcon from '../../assets/icons/InforIcon.png';
 import { get_array } from "./DeviceData";
 
+import DeviceSwitch from "./DeviceSwitch";
+import { useGlobalContext } from "../context/index";
+import LightBulb from '../../assets/icons/light_bulb.png';
+import WaterPump from '../../assets/icons/WaterPump.png';
+import ControlSwitch from "../ManualControl/ControlSwitch";
+
 export default function DeviceCard() {
+
+    const {lightBtn,pumperBtn} = useGlobalContext()
+    
+    const devices= [
+        { 
+            id: "2001",
+            name: "Water Pump 1",
+            location: "Garden 1",
+            img: WaterPump,
+            type: "Water Pump",
+            feed_id: 'pumper',
+            value: pumperBtn === '1'? true:false
+        },
+        { 
+            id: "1001",
+            name: "Light 1",
+            location: "Garden 1",
+            img: LightBulb,
+            type: "Light",
+            feed_id: 'led',
+            value: lightBtn === '1'? true:false
+        },
+    ]
 
     const [deviceData, setDeviceData] = useState([]);
     const [lightDevices, setLightDevices] = useState([]);
@@ -23,22 +51,15 @@ export default function DeviceCard() {
 
     useEffect(() => {
         // Lọc các thiết bị loại "light"
-        const lightDevicesFiltered = deviceData.filter(device => device.type === "Light");
-        setLightDevices(lightDevicesFiltered);
+        const lightDevicesFiltered = devices.filter(device => device.feed_id === "led");
+        const additionalLightDevices = deviceData.filter(device => device.type === "Light"); 
+        setLightDevices([...lightDevicesFiltered, ...additionalLightDevices]);
 
         // Lọc các thiết bị loại "water pump"
-        const waterPumpDevicesFiltered = deviceData.filter(device => device.type === "Water Pump");
-        setWaterPumpDevices(waterPumpDevicesFiltered);
+        const waterPumpDevicesFiltered = devices.filter(device => device.feed_id === "pumper");
+        const additionalWaterPumpDevices = deviceData.filter(device => device.type === "Water Pump"); 
+        setWaterPumpDevices([...waterPumpDevicesFiltered, ...additionalWaterPumpDevices]);
     }, [deviceData]);
-
-    const [triggerRender, setTriggerRender] = useState(false);
-
-    useEffect(() => {}, [triggerRender]);
-
-    const handleChange = (item) => {
-        onChangeItem(item);
-        setTriggerRender((prev) => !prev);
-    };
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -73,13 +94,8 @@ export default function DeviceCard() {
                             <img src={item.img} alt="device_img" className="w-24 mx-auto mb-4" />
                             <p className="mb-2 flex justify-center font-semibold text-lg">{item.name}</p>
                             <div className="flex justify-center mt-4">
-                                <ReactSwitch
-                                    checked={item.status}
-                                    onChange={() => handleChange(item)}
-                                    uncheckedIcon={false}
-                                    checkedIcon={false}
-                                    className="switch_button"
-                                />
+                                <DeviceSwitch key = {index} device= {item}/>
+                                {/* <ControlSwitch key={index} type={index} device={item} /> */}
                             </div>
                         </div>
                     ))}
@@ -101,13 +117,7 @@ export default function DeviceCard() {
                             <img src={item.img} alt="device_img" className="w-24 mx-auto mb-4" />
                             <p className="mb-2 flex justify-center font-semibold text-lg">{item.name}</p>
                             <div className="flex justify-center mt-4">
-                                <ReactSwitch
-                                    checked={item.status}
-                                    onChange={() => handleChange(item)}
-                                    uncheckedIcon={false}
-                                    checkedIcon={false}
-                                    className="switch_button"
-                                />
+                                <DeviceSwitch key = {index} device={item}/>
                             </div>
                         </div>
                     ))}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LightBulb from '../assets/icons/light_bulb.png';
 import WaterPump from '../assets/icons/WaterPump.png';
@@ -10,99 +10,86 @@ import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { useGlobalContext } from './context';
+import { get_array } from "./DeviceManagement/DeviceData";
 
-const lightList = [{
-    id: 1,
-    name: "Light 1",
-    icon: LightBulb,
-    status: "off"
-},
-{
-    id: 2,
-    name: "Light 2",
-    icon: LightBulb,
-    status: "off"
-},
-{
-    id: 3,
-    name: "Light 3",
-    icon: LightBulb,
-    status: "off"
-},
-{
-    id: 4,
-    name: "Light 4",
-    icon: LightBulb,
-    status: "off"
-},
-{
-    id: 5,
-    name: "Light 5",
-    icon: LightBulb,
-    status: "off"
-},
-{
-    id: 6,
-    name: "Light 6",
-    icon: LightBulb,
-    status: "off"
-},
-{
-    id: 7,
-    name: "Light 7",
-    icon: LightBulb,
-    status: "off"
-},
-{
-    id: 8,
-    name: "Light 8",
-    icon: LightBulb,
-    status: "off"
-},
-
-];
-
-const waterPumpList = [{
-    id: 1,
-    name: "Water pump 1",
-    icon: WaterPump,
-    status: "off"
-},
-{
-    id: 2,
-    name: "Water pump 2",
-    icon: WaterPump,
-    status: "off"
-},
-{
-    id: 3,
-    name: "Water pump 3",
-    icon: WaterPump,
-    status: "off"
-},
-{
-    id: 4,
-    name: "Water pump 4",
-    icon: WaterPump,
-    status: "off"
-},
-{
-    id: 5,
-    name: "Water pump 5",
-    icon: WaterPump,
-    status: "off"
-},
-{
-    id: 6,
-    name: "Water pump 6",
-    icon: WaterPump,
-    status: "off"
-},
-
-];
 
 export default function AddTask({ isOpen, onClose }) {
+    const {lightBtn,pumperBtn} = useGlobalContext()
+    
+    const devices= [
+        { 
+            id: "2001",
+            name: "Water Pump 1",
+            location: "Garden 1",
+            img: WaterPump,
+            type: "Water Pump",
+            feed_id: 'pumper',
+            value: pumperBtn === '1'? true:false
+        },
+        { 
+            id: "1001",
+            name: "Light 1",
+            location: "Garden 1",
+            img: LightBulb,
+            type: "Light",
+            feed_id: 'led',
+            value: lightBtn === '1'? true:false
+        },
+    ]
+
+    const [deviceData, setDeviceData] = useState([]);
+    const [lightDevices, setLightDevices] = useState([]);
+    const [waterPumpDevices, setWaterPumpDevices] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = get_array();
+            setDeviceData(data);
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        // Lọc các thiết bị loại "light"
+        const lightDevicesFiltered = devices.filter(device => device.feed_id === "led");
+        const additionalLightDevices = deviceData.filter(device => device.type === "Light"); 
+        setLightDevices([...lightDevicesFiltered, ...additionalLightDevices]);
+
+        // Lọc các thiết bị loại "water pump"
+        const waterPumpDevicesFiltered = devices.filter(device => device.feed_id === "pumper");
+        const additionalWaterPumpDevices = deviceData.filter(device => device.type === "Water Pump"); 
+        setWaterPumpDevices([...waterPumpDevicesFiltered, ...additionalWaterPumpDevices]);
+    }, [deviceData]);
+
+    const [device, setDevice] = useState(lightDevices[0]);
+    const [taskName, setTaskName] = useState('');
+    const [startTime, setStartTime] = useState('');
+    const [endTime, setEndTime] = useState('');
+    
+    const handleAddTask = (device, startTime, endTime, taskName) => {
+        const data = {
+            weekdays: [1, 2, 3, 4, 5, 6, 7, 8],
+            timeStart: startTime,
+            timeEnd: endTime,
+            action: device.type === 'Light' ? 'lighting' : 'pumping',
+            name: taskName
+        };
+          
+        axios.post('/api/task/add', data)
+    }
+
     const [selected, setSelected] = useState(0);
+
+    useEffect(() => {
+        if (selected === 0) {
+            setDevice(lightDevices[0]);
+        } else if (selected === 1) {
+            setDevice(waterPumpDevices[0]);
+        }
+    }, [selected, lightDevices, waterPumpDevices]);
+    
     const [deviceSelected, setDeviceSelected] = useState(0);
 
     const [toggleState, setToggleState] = useState(1);
@@ -119,6 +106,9 @@ export default function AddTask({ isOpen, onClose }) {
         }
     };
 
+    
+    
+
     return (
         <div
             className="modal-background fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
@@ -132,7 +122,6 @@ export default function AddTask({ isOpen, onClose }) {
                         </svg>
                     </button>
                 </div>
-
                 
                 <div className='px-[9rem] flex'>
                     <div className={'border-2 border-[#8F8F8F] rounded-lg mr-auto py-1 w-[120px] font-semibold flex items-center justify-center transition-colors duration-150 ease-in-out hover: text-gray-700 hover:border-gray-700 ' + (selected == 0 ? "bg-customGreen text-white" : "text-[#8F8F8F]")}
@@ -167,13 +156,13 @@ export default function AddTask({ isOpen, onClose }) {
                         onSlideChange={() => console.log('slide change')}
                         onSwiper={(swiper) => console.log(swiper)}
                     >
-                        {lightList.map((item, index) => (
+                        {lightDevices.map((item, index) => (
                             <SwiperSlide
                                 key={index}
                                 onClick={() => setDeviceSelected(index)}
                                 className={'device-item border-2 rounded-lg mr-4 p-2 mb-10 ' + (deviceSelected === index ? "border-[#00C443]" : "border-black")}
                             >
-                                <img src={item.icon} alt="icon" className="w-auto h-[110px] mx-auto mb-2" />
+                                <img src={item.img} alt="icon" className="w-auto h-[110px] mx-auto mb-2" />
                                 <span className="block text-center">{item.name}</span>
                             </SwiperSlide>
                         ))}
@@ -215,13 +204,13 @@ export default function AddTask({ isOpen, onClose }) {
                         onSlideChange={() => console.log('slide change')}
                         onSwiper={(swiper) => console.log(swiper)}
                     >
-                        {waterPumpList.map((item, index) => (
+                        {waterPumpDevices.map((item, index) => (
                             <SwiperSlide
                                 key={index}
                                 onClick={() => setDeviceSelected(index)}
                                 className={'device-item border-2 rounded-lg mr-4 p-2 mb-10 ' + (deviceSelected === index ? "border-[#00C443]" : "border-black")}
                             >
-                                <img src={item.icon} alt="icon" className="w-auto h-[110px] mx-auto mb-2" />
+                                <img src={item.img} alt="icon" className="w-auto h-[110px] mx-auto mb-2" />
                                 <span className="block text-center">{item.name}</span>
                             </SwiperSlide>
                         ))}
@@ -233,14 +222,14 @@ export default function AddTask({ isOpen, onClose }) {
 
                     <div className='px-20'>
                         <p className='text-[#8F8F8F] font-semibold my-2 text-[16px]'>Name</p>
-                        <input type="text" className='border-2 border-gray-500 rounded-lg w-full px-2'/>
+                        <input type="text" className='border-2 border-gray-500 rounded-lg w-full px-2' value={taskName} onChange={e => setTaskName(e.target.value)}/>
                     </div>
 
                     <div className='flex justify-between px-20'>
 
                         <div>
                             <p className='text-[#8F8F8F] font-semibold my-2 text-[16px]'>From</p>
-                            <input type="time" className='border-2 border-gray-500 rounded-lg'/>
+                            <input type="time" className='border-2 border-gray-500 rounded-lg' value={startTime} onChange={e => setStartTime(e.target.value)}/>
                         </div>
 
                         <div className='flex justify-center items-center pt-10'>
@@ -249,7 +238,7 @@ export default function AddTask({ isOpen, onClose }) {
 
                         <div>
                             <p className='text-[#8F8F8F] font-semibold my-2 text-[16px]' >To</p>
-                            <input type="time" className='border-2 border-gray-500 rounded-lg' />
+                            <input type="time" className='border-2 border-gray-500 rounded-lg' value={endTime} onChange={e => setEndTime(e.target.value)}/>
                         </div> 
                     </div>
                 </div>
@@ -257,7 +246,8 @@ export default function AddTask({ isOpen, onClose }) {
                 
 
                 <div className='justify-center flex mt-8'>
-                    <button type="button" className="text-white bg-customGreen rounded-xl text-xl px-10 py-2 text-center me-2 mb-2 transition duration-300 ease-in-out hover:bg-green-600">
+                    <button type="button" className="text-white bg-customGreen rounded-xl text-xl px-10 py-2 text-center me-2 mb-2 transition duration-300 ease-in-out hover:bg-green-600"
+                    onClick={() => handleAddTask(device, startTime, endTime, taskName) }>
                         Add
                     </button>
                 </div>
