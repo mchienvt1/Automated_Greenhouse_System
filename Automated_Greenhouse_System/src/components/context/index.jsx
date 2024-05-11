@@ -4,6 +4,7 @@ import {username,key } from '../utils/env';
 
 async function getLastValue (feed_id){
     const url = `https://io.adafruit.com/api/v2/${username}/feeds/${feed_id}/data/last`;
+    // const url = 'localhost:8080/log/la'
     const options = {
         headers: {
           'X-AIO-Key': key

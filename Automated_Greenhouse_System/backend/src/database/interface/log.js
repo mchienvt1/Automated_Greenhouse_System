@@ -1,9 +1,10 @@
 const Log= require('../model/log')
 const { mutipleMongooseObject, mongooseToObject} = require('../utils/mongoose.js');
+const state = require('../config/state.json');
 
 class LogInterface{
     constructor(){
-        this.count = 1;
+        this.count = 37;
     }
     async createLog(device_id, data_retrieve, time){
         try{
@@ -30,9 +31,10 @@ class LogInterface{
                 value :value,
                 controlStatus : controlStatus
             })
-            console.log(log)
+            console.log(`Log added ${this.count}`)
             await log.save()
             return log
+
         }catch(error){
             console.log(error)
             return null
@@ -58,6 +60,27 @@ class LogInterface{
             return null;
 
         }
+    }
+    async getLastLog(device_id){
+        try{
+            const log = await Log.find({device_id : device_id}).sort({time : -1}).limit(1)
+            .then(
+                (logs) => logs.map((log) => ({
+                    id : log.log_id,
+                    humidity : log.value.HUMIDITY,
+                    temperature : log.value.TEMPERATURE,
+                    lightIntensity : log.value.LIGHT,
+                    soilHumidity : log.value.MOISTURE,
+                    lightBtn : log.controlStatus.LIGHT,
+                    pumperBtn : log.controlStatus.PUMP,
+                }))
+            );
+            console.log(log);
+            return log;
+        } catch(error){
+            console.log(error);
+            return null;
+        }  
     }
 }
 
