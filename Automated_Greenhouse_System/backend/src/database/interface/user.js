@@ -82,6 +82,17 @@ class UserInterface{
             // Handle finally
         }
     }
+
+    async getUserByUsername(username){
+        try {
+            return User.findOne({username : username});
+        } catch (error) {
+            console.log(error);
+            return null;
+        } finally {
+            return null;
+        }
+    }
 }
 
 module.exports = new UserInterface();
