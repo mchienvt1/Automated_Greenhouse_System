@@ -1,13 +1,15 @@
-const {username, key } = require('../config/env');
 const { broker, publish } = require('./broker');
 const axios = require('axios');
 const Log = require('../database/interface/log');
 
+
 class IoTInterface {
-    constructor() {
+    constructor() { 
         // Some data to be filled
     }
     async getLastValue(feed_id){
+        const username = process.env.ADAFRUIT_USERNAME;
+        const key = process.env.ADAFRUIT_KEY;
         const url = `https://io.adafruit.com/api/v2/${username}/feeds/${feed_id}/data/last`;
         const options = {
             headers: {
