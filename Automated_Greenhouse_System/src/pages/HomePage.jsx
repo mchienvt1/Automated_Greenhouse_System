@@ -13,8 +13,6 @@ const HomePage = () => {
   useEffect(() => {
     document.title = "Home";
   });
-  const logs = axios.get('/api/log/');
-  console.log(logs);
   const {
     setTemperature,
     setLightIntensity,

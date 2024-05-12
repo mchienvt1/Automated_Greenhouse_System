@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { http } from "../libs/http";
+// import { http } from "../libs/http";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -26,8 +27,12 @@ const Login = () => {
       password,
     };
 
-    http
-      .post("/user/login", data)
+    axios
+      .post("/api/user/login", data, {
+        header : {
+          "Content-Type": "x-www-form-urlencoded",
+        }
+      })
       .then((res) => {
         const user = res.data;
         localStorage.setItem("user", JSON.stringify(user));

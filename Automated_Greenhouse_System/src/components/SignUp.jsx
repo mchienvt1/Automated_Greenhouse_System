@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate, Link } from "react-router-dom";
-import { http } from "../libs/http";
+// import { http } from "../libs/http";
+import axios from "axios";
 
 const SignUp = () => {
   const [fullname, setFullname] = useState("");
@@ -49,8 +50,13 @@ const SignUp = () => {
       fullname,
     };
 
-    http
-      .post("/user/signup", data)
+    axios
+      .post("/api/user/signup", data, {
+        header: {
+          "Content-Type": "x-www-form-urlencoded"
+        }
+      }
+      )
       .then((res) => {
         const user = res.data;
         console.log(user);

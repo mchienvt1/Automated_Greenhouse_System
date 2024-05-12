@@ -6,8 +6,8 @@ class UserController {
         try {
             const { username, password } = req.body;
             const user = await User.getUserByUsername(username);
-            // console.log(username);
-            // console.log(password);
+            console.log(username);
+            console.log(password);
             if (!user) {
                 return res.status(404).send({msg : 'User does not exist'});
             }   
