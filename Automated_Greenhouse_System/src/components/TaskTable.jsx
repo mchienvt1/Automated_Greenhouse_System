@@ -10,31 +10,36 @@ const scheduled_task = [
         "id": 1,
         "description": "Water tulip in the morning",
         "action": "Watering",
-        "time": "12:00:00"
+        "startTime": "12:00:00",
+        "endTime": "12:30:00"
     },
     {
         "id": 2,
         "description": "Turn on in the morning",
         "action": "Lighting",
-        "time": "14:00:00"
+        "startTime": "12:00:00",
+        "endTime": "12:30:00"
     },
     {
         "id": 3,
         "description": "Turn on in the morning",
         "action": "Lighting",
-        "time": "14:00:00"
+        "startTime": "12:00:00",
+        "endTime": "12:30:00"
     },
     {
         "id": 4,
         "description": "Turn on in the morning",
         "action": "Lighting",
-        "time": "14:00:00"
+        "startTime": "12:00:00",
+        "endTime": "12:30:00"
     },
     {
         "id": 5,
         "description": "Water tulip",
         "action": "Watering",
-        "time": "14:00:00"
+        "startTime": "12:00:00",
+        "endTime": "12:30:00"
     },
 ];
 
@@ -80,7 +85,10 @@ function TaskTable() {
                                 Task
                             </th>
                             <th scope="col" className="px-6 py-3 border-r border-black">
-                                Time
+                                Start Time
+                            </th>
+                            <th scope="col" className="px-6 py-3 border-r border-black">
+                                End Time
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Action
@@ -96,7 +104,10 @@ function TaskTable() {
                                     {item.description}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {item.time}
+                                    {item.startTime}
+                                </td>
+                                <td className="px-6 py-4">
+                                    {item.endTime}
                                 </td>
                                 <td className="px-6 py-4">
                                     {item.action}
@@ -112,7 +123,10 @@ function TaskTable() {
                                     {item.description}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {item.time}
+                                    {item.startTime}
+                                </td>
+                                <td className="px-6 py-4">
+                                    {item.endTime}
                                 </td>
                                 <td className="px-6 py-4">
                                     {item.action}
@@ -128,7 +142,10 @@ function TaskTable() {
                                     {item.description}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {item.time}
+                                    {item.startTime}
+                                </td>
+                                <td className="px-6 py-4">
+                                    {item.endTime}
                                 </td>
                                 <td className="px-6 py-4">
                                     {item.action}

@@ -34,8 +34,7 @@ const Average = () => {
         return (sum / filteredValues.length).toFixed(1);
     };
     
-    console.log("Temperature current: ", temperature);
-    console.log("Temperature: ", temperatureValues);
+    console.log("humidityValues: ", humidityValues);
     const averageTemperature = calculateAverage(temperatureValues);
     const averageHumidity = calculateAverage(humidityValues);
     const averageLightIntensity = calculateAverage(lightIntensityValues);
