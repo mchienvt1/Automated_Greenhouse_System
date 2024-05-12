@@ -68,22 +68,9 @@ class UserInterface{
             // Handle error
         }
     }
-
-    async getUserbyUsername(username){
-        try {
-            return await this.user.findOne({username : username});
-        } catch (error) {
-            // Handle error
-            console.log(error);
-        } finally {
-            return  null;
-            // Handle finally
-        }
-    }
-
     async getUserByUsername(username){
         try {
-            return User.findOne({username : username});
+            return await User.findOne({username : username});
         } catch (error) {
             console.log(error);
             return null;
