@@ -1,6 +1,7 @@
 const { broker, publish } = require('./broker');
 const axios = require('axios');
 const Log = require('../database/interface/log');
+const { getTime } = require('../utils/syslog');
 
 
 class IoTInterface {
@@ -47,19 +48,37 @@ class IoTInterface {
         return 
     };
     activate(feed_id){
-        async function callAPI(){
-            publish(feed_id, '1');
+        function callAPI(){
+            const username = process.env.VITE_ADAFRUIT_USERNAME;
+            const key = process.env.VITE_ADAFRUIT_KEY;
+            const url = `https://io.adafruit.com/api/v2/${username}/feeds/${feed_id}/data`;
+            const options = {
+                headers: {
+                  'X-AIO-Key': key
+                }
+              };
+            console.log(`[*] Schedule run ${feed_id} at ${getTime()}`)
+            axios.post(url, {value: '1'}, options);
         }
         return callAPI
     };
     deactivate(feed_id){
-        async function callAPI(){
-            publish(feed_id, '0');
+        function callAPI(){
+            const username = process.env.VITE_ADAFRUIT_USERNAME;
+            const key = process.env.VITE_ADAFRUIT_KEY;
+            const url = `https://io.adafruit.com/api/v2/${username}/feeds/${feed_id}/data`;
+            const options = {
+                headers: {
+                  'X-AIO-Key': key
+                }
+              };
+            console.log(`[*] Schedule run ${feed_id} at ${getTime()}`)
+            axios.post(url, {value: '0'}, options);
         }
         return callAPI
     };
     getControl(feed_id){
-        return {active: this.activate(feed_id), deactive: this.deactivate(feed_id)}
+        return [this.activate(feed_id), this.deactivate(feed_id)]
     }
 }
 

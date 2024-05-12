@@ -16,16 +16,14 @@ class ScheduleInterface{
                 taskStart, taskEnd
             } = task
             const schedule = new Schedule ({
-                task_id : State.getScheduleIndex(),
+                task_id : State.getTaskIndex(),
                 user_id : user_id,
                 device_id : device_id,
-                task_id : task_id,
                 description : description,
                 time : { start : timeStart, end : timeEnd},
                 days : weeksday,
                 taskStart : taskStart,
-                taskEnd : taskEnd,
-                action : action
+                taskEnd : taskEnd 
             })
             return await schedule.save()
         } catch (error) {
@@ -34,6 +32,8 @@ class ScheduleInterface{
             return null
         }
     }
+
+ 
     async deleteSchedule(task_id){
         try {
             return await this.schedule.updateOne({task_id : task_id}, {deleted : true});
@@ -64,6 +64,7 @@ class ScheduleInterface{
             return null
         }
     }
+
 }
 
 module.exports = new ScheduleInterface();

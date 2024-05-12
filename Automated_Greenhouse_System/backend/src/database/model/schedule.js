@@ -12,11 +12,11 @@ const Schedule = mongoose.Schema({
     },
     device_id : {
         required : true,
-        type : deviceSchema.device_id,
+        type : String,
     },
     user_id : {
         required : true,
-        type : userSchema.user_id,
+        type : String,
     },
     description : {
         required : true,
@@ -45,7 +45,7 @@ const Schedule = mongoose.Schema({
     },
     taskStart : {
         required : true,
-        type : Task,
+        type : Object,
         get : function(value){
             return JSON.parse(value); 
         },
@@ -55,7 +55,7 @@ const Schedule = mongoose.Schema({
     },
     taskEnd : {
         required : true,
-        type : Task,
+        type : Object,
         get : function(value){
             return JSON.parse(value); 
         },

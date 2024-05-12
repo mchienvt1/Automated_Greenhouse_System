@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '../.env' });
 const express = require('express');
 const route = require('./routes/index.js');
 const app  = express()
@@ -6,7 +7,7 @@ const IoTInterface  = require('./IOT/IoT.js');
 const { getTime, gracefulShutdown} = require('./utils/syslog.js');
 const PORT = process.env.PORT || 8080;
 const cors = require('cors');
-require('dotenv').config({ path: '../.env' });
+
 db.connect();
 
 gracefulShutdown();
