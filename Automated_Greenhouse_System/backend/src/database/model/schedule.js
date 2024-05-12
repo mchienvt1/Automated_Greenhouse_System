@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-const Schedule = require('../utils/schedule.js');
+const Task = require('../utils/task.js');
 const IoT = require('../../IOT/IoT.js');
 const userSchema= require('./user.js');
 const deviceSchema = require('./device.js'); 
 const IoTInterface = require('../../IOT/IoT.js');
 
-const scheduleTaskSchema = mongoose.Schema({
+const Schedule = mongoose.Schema({
     task_id : {
         required : true,
         type : String,
@@ -25,18 +25,43 @@ const scheduleTaskSchema = mongoose.Schema({
     time : {
         start : {
             required : true,
-            type : Schedule
+            type : String
         },
         end : {
             required : true,
-            type : Schedule
+            type : String
         },
-        required: true,
-        type: Schedule
+        type: Object,
+        get : function(value){
+            return JSON.parse(value);
+        },
+        set : function(value){
+            return JSON.stringify(value);
+        }
     },
-    action : {
+    days : {
         required : true,
-        type : Map,
+        type : Array,
+    },
+    taskStart : {
+        required : true,
+        type : Task,
+        get : function(value){
+            return JSON.parse(value); 
+        },
+        set : function(value){
+            return JSON.stringify(value);
+        }
+    },
+    taskEnd : {
+        required : true,
+        type : Task,
+        get : function(value){
+            return JSON.parse(value); 
+        },
+        set : function(value){
+            return JSON.stringify(value);
+        }
     },
     deleted : {
         required : false,
@@ -45,4 +70,4 @@ const scheduleTaskSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('ScheduleTask', scheduleTaskSchema)
+module.exports = mongoose.model('Schedule', Schedule)

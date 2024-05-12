@@ -46,20 +46,20 @@ class IoTInterface {
     control(){
         return 
     };
-    activate(device_id){
+    activate(feed_id){
         async function callAPI(){
-            publish(device_id, '1');
+            publish(feed_id, '1');
         }
         return callAPI
     };
-    deactivate(device_id){
+    deactivate(feed_id){
         async function callAPI(){
-            publish(device_id, '0');
+            publish(feed_id, '0');
         }
         return callAPI
     };
-    getControl(device_id){
-        return {active: this.activate(device_id), deactive: this.deactivate(device_id)}
+    getControl(feed_id){
+        return {active: this.activate(feed_id), deactive: this.deactivate(feed_id)}
     }
 }
 

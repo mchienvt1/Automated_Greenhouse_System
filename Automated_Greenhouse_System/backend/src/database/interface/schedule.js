@@ -1,20 +1,30 @@
 const { mutipleMongooseObject, mongooseToObject} = require('../utils/mongoose.js');
 const Schedule = require('../model/schedule.js');
 const State = require('../config/state.js');
+const Task = require('../utils/task.js');
+
 class ScheduleInterface{
-    constructor(){
-    //     this.schedule = require('../model/schedule.js');
-        this.count = 1;
-    }
-    async createSchedule(user_id, device_id, description, time, action){
+    async createSchedule(info, time, task){
         try {
+            const {
+                user_id, device_id,description,
+            } = info;
+            const {
+              timeStart, timeEnd, weeksday
+            } = time;
+            const {
+                taskStart, taskEnd
+            } = task
             const schedule = new Schedule ({
                 task_id : State.getScheduleIndex(),
                 user_id : user_id,
                 device_id : device_id,
                 task_id : task_id,
                 description : description,
-                time : time,
+                time : { start : timeStart, end : timeEnd},
+                days : weeksday,
+                taskStart : taskStart,
+                taskEnd : taskEnd,
                 action : action
             })
             return await schedule.save()
@@ -56,4 +66,4 @@ class ScheduleInterface{
     }
 }
 
-module.exports = ScheduleInterface;
+module.exports = new ScheduleInterface();
