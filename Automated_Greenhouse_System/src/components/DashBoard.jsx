@@ -27,6 +27,11 @@ const navLinks = [
     ref: "/device_management",
   },
   {
+    name: "Settings",
+    icon: SettingFill,
+    ref: "/settings",
+  },
+  {
     name: "Sign Out",
     icon: SignOutSquare,
     ref: "/login",
