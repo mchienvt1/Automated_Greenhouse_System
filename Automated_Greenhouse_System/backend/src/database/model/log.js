@@ -21,7 +21,7 @@ const logSchema = mongoose.Schema({
         required : true,
     },
     time : {
-        type : String,
+        type : Date,
         required : true,
     },
     value : {

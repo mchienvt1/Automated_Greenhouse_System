@@ -1,6 +1,7 @@
 const { broker, publish } = require('./broker');
 const axios = require('axios');
 const Log = require('../database/interface/log');
+const { getTime } = require('../utils/syslog');
 
 
 class IoTInterface {
@@ -35,10 +36,7 @@ class IoTInterface {
     };
     async store(device_id, data_retrieve){
         try {
-            const time = new Date().toLocaleString('en-US', { timeZone: 'Asia/Bangkok', hour12: false, day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-
-            await Log.createLog(device_id, data_retrieve, time);
-
+            await Log.createLog(device_id, data_retrieve);
             return true;
         } catch (error) {
             console.log(error);
@@ -49,17 +47,39 @@ class IoTInterface {
     control(){
         return 
     };
-    activate(){
-        return
+    activate(feed_id){
+        function callAPI(){
+            const username = process.env.VITE_ADAFRUIT_USERNAME;
+            const key = process.env.VITE_ADAFRUIT_KEY;
+            const url = `https://io.adafruit.com/api/v2/${username}/feeds/${feed_id}/data`;
+            const options = {
+                headers: {
+                  'X-AIO-Key': key
+                }
+              };
+            console.log(`[*] Schedule run ${feed_id} at ${getTime()}`)
+            axios.post(url, {value: '1'}, options);
+        }
+        return callAPI
     };
-    deactivate(){
-        return
-    };  
-    control(){
-
+    deactivate(feed_id){
+        function callAPI(){
+            const username = process.env.VITE_ADAFRUIT_USERNAME;
+            const key = process.env.VITE_ADAFRUIT_KEY;
+            const url = `https://io.adafruit.com/api/v2/${username}/feeds/${feed_id}/data`;
+            const options = {
+                headers: {
+                  'X-AIO-Key': key
+                }
+              };
+            console.log(`[*] Schedule run ${feed_id} at ${getTime()}`)
+            axios.post(url, {value: '0'}, options);
+        }
+        return callAPI
+    };
+    getControl(feed_id){
+        return [this.activate(feed_id), this.deactivate(feed_id)]
     }
 }
-
-
 
 module.exports = new IoTInterface();

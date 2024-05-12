@@ -13,9 +13,6 @@ class State{
     getDeviceIndex(){
         return this.config.device.index++;
     }
-    getScheduleIndex(){
-        return this.config.schedule.index++;
-    }
     getTaskIndex(){
         return this.config.task.index++;
     }

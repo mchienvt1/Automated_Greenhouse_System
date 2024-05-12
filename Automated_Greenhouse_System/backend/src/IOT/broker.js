@@ -1,6 +1,6 @@
 const mqtt = require('mqtt');
-const username = process.env.ADAFRUIT_USERNAME;
-const key = process.env.ADAFRUIT_KEY;
+const username = process.env.VITE_ADAFRUIT_USERNAME;
+const key = process.env.VITE_ADAFRUIT_KEY;
 
 const brokerUrl = `mqtts://${username}:${key}@io.adafruit.com`
 const options = { port : 443 }
@@ -41,9 +41,4 @@ function subscribeAll(){
 }
 subscribeAll();
 
-function publish(feed_id,data){
-    broker.publish(username + "/feeds/" + feed_id,data,()=>{
-        // console.log("Published to " + feed_id + " : " + data);
-    });
-}
-module.exports = { broker , publish };
+module.exports = { broker };

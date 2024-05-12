@@ -1,21 +1,29 @@
 const { mutipleMongooseObject, mongooseToObject} = require('../utils/mongoose.js');
 const Schedule = require('../model/schedule.js');
+const State = require('../config/state.js');
+const Task = require('../utils/task.js');
 
 class ScheduleInterface{
-    constructor(){
-    //     this.schedule = require('../model/schedule.js');
-        this.count = 1;
-    }
-    async createSchedule(user_id, device_id, task_id, description, time, action){
+    async createSchedule(info, time, task){
         try {
+            const {
+                user_id, device_id,description,
+            } = info;
+            const {
+              timeStart, timeEnd, weeksday
+            } = time;
+            const {
+                taskStart, taskEnd
+            } = task
             const schedule = new Schedule ({
-                task_id : this.count++,
+                task_id : State.getTaskIndex(),
                 user_id : user_id,
                 device_id : device_id,
-                task_id : task_id,
                 description : description,
-                time : time,
-                action : action
+                time : { start : timeStart, end : timeEnd},
+                days : weeksday,
+                taskStart : taskStart,
+                taskEnd : taskEnd 
             })
             return await schedule.save()
         } catch (error) {
@@ -24,6 +32,8 @@ class ScheduleInterface{
             return null
         }
     }
+
+ 
     async deleteSchedule(task_id){
         try {
             return await this.schedule.updateOne({task_id : task_id}, {deleted : true});
@@ -45,7 +55,7 @@ class ScheduleInterface{
     }
     async getByDevice(device_id){
         try {
-            return await Schedule.find({device_id : device_id}).then(
+            return await Schedule.find({device_id : device_id}).sort({time :-1}).then(
                 (tasklist) => mutipleMongooseObject(tasklist)
             );
         } catch (error) {
@@ -54,6 +64,7 @@ class ScheduleInterface{
             return null
         }
     }
+
 }
 
-module.exports = ScheduleInterface;
+module.exports = new ScheduleInterface();
