@@ -38,7 +38,7 @@ const ChartComponent = () => {
         ...prevData,
         { name: new Date().toLocaleTimeString(), value: soilHumidity },
       ]);
-    }, 3000);
+    }, 10000);
 
     // Xóa interval khi component unmount
     return () => clearInterval(interval);

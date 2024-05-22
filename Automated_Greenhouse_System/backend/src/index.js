@@ -26,7 +26,7 @@ IoTInterface.pullData(1);
 setInterval(() => {
     //console.log(`Pulling data at ${time}`)
     IoTInterface.pullData(1);
-}, 60000)
+}, 10000)
 
 
 app.listen(PORT, () => {

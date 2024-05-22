@@ -2,7 +2,7 @@ const { broker, publish } = require('./broker');
 const axios = require('axios');
 const Log = require('../database/interface/log');
 const { getTime } = require('../utils/syslog');
-
+const IoT = require('../IOT/IoT'); 
 
 class IoTInterface {
     constructor() { 
@@ -31,7 +31,15 @@ class IoTInterface {
             lightBtn: await this.getLastValue('led'),
             pumperBtn: await this.getLastValue('pumper')
         }
-        // console.log(data_retrieve);
+        const activate= this.activate('led');
+        const deactivate= this.deactivate('led');
+        
+        if ( 70 < parseFloat(data_retrieve.lightIntensity) ){
+            deactivate();
+        } else if ( 40 > parseFloat(data_retrieve.soilHumidity) ){
+            activate();
+        }
+
         return await this.store(device_id, data_retrieve);
     };
     async store(device_id, data_retrieve){
@@ -43,6 +51,9 @@ class IoTInterface {
             return false;
         }
     }
+
+
+
 
     control(){
         return 
@@ -78,7 +89,9 @@ class IoTInterface {
         return callAPI
     };
     getControl(feed_id){
-        return [this.activate(feed_id), this.deactivate(feed_id)]
+        let a =  this.activate(feed_id)
+        let d =  this.deactivate(feed_id)  
+        return [a, d]
     }
 }
 

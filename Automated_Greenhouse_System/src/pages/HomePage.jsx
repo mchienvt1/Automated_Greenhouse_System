@@ -49,16 +49,13 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="w-full p-5">
-        <div className="grid grid-cols-1 gap-8 pb-5 md:grid-cols-12">
-          <div className="col-span-12 lg:col-span-6">
+      <div className="p-5">
+        <div className="grid grid-cols-1 gap-5 pb-5 md:grid-cols-12">
+          <div className="col-span-12 lg:col-span-8">
             <EnvironmentalCards />
           </div>
           <div className="col-span-12 lg:col-span-4">
             <MyCalendar />
-          </div>
-          <div className="col-span-12 lg:col-span-2">
-            <ManualControl />
           </div>
           <div className="col-span-12 md:col-span-8">
             <ChartComponent />
@@ -67,15 +64,6 @@ const HomePage = () => {
             <Average />
           </div>
         </div>
-
-        {/* <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
-          <div className="col-span-12 md:col-span-8">
-            <ChartComponent />
-          </div>
-          <div className="col-span-12 md:col-span-4">
-            <Average />
-          </div>
-        </div> */}
       </div>
     </>
   );
